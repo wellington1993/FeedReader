@@ -1,0 +1,18 @@
+<%
+url = "http://quemcuida.com.br/blog/feed/"
+_feed = Feedjira::Feed.fetch_and_parse url
+
+@links=[]
+_feed.entries.take(5).each do |post|
+	@links << [(link_to "#{post.title}", post.url ).html_safe,post.published]
+end
+
+%>
+
+<% @links.each do |link| %>
+	<%= link[0] %>
+	<br>
+	<%= link[1].strftime("%b, %m %Y - %H:%M") %>
+	<br>
+	<br>
+<% end %>
